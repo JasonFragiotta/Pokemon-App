@@ -43,6 +43,21 @@ class PokemonUpdate(SQLModel):
     legendary: bool | None = None
 
 
+class PokemonCreate(SQLModel):
+    dex_number: int
+    name: str
+    type1: str | None = None
+    type2: str | None = None
+    hp: int
+    attack: int
+    defense: int
+    sp_atk: int
+    sp_def: int
+    speed: int
+    generation: int
+    legendary: bool
+
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
@@ -120,6 +135,40 @@ def update_pokemon(pokemon_id: int, updated: PokemonUpdate):
         for key, value in update_data.items():
             setattr(pokemon, key, value)
 
+        session.add(pokemon)
+        session.commit()
+        session.refresh(pokemon)
+        return pokemon
+
+
+@app.post("/api/pokemon", status_code=201)
+def create_pokemon(new_pokemon: PokemonCreate):
+    total = (
+        new_pokemon.hp
+        + new_pokemon.attack
+        + new_pokemon.defense
+        + new_pokemon.sp_atk
+        + new_pokemon.sp_def
+        + new_pokemon.speed
+    )
+
+    pokemon = Pokemon(
+        dex_number=new_pokemon.dex_number,
+        name=new_pokemon.name.strip(),
+        type1=new_pokemon.type1.strip() if new_pokemon.type1 else None,
+        type2=new_pokemon.type2.strip() if new_pokemon.type2 else None,
+        total=total,
+        hp=new_pokemon.hp,
+        attack=new_pokemon.attack,
+        defense=new_pokemon.defense,
+        sp_atk=new_pokemon.sp_atk,
+        sp_def=new_pokemon.sp_def,
+        speed=new_pokemon.speed,
+        generation=new_pokemon.generation,
+        legendary=new_pokemon.legendary,
+    )
+
+    with Session(engine) as session:
         session.add(pokemon)
         session.commit()
         session.refresh(pokemon)

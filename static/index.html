@@ -32,10 +32,12 @@
     </section>
 
       <section class="edit-panel">
-      <h2>Edit Selected Pokemon</h2>
+      <h2>Add or Edit Pokemon</h2>
+      <p>Leave the form blank and click the button to add a new Pokemon, or select one to update an existing record.</p>
       <form id="pokemonForm">
         <input type="hidden" id="pokemonId" />
         <div class="form-grid">
+          <label>Dex Number<input id="dex_number" type="number" min="1" required /></label>
           <label>Name<input id="name" type="text" required /></label>
           <label>Type 1<input id="type1" type="text" /></label>
           <label>Type 2<input id="type2" type="text" /></label>
@@ -52,7 +54,7 @@
           </select></label>
         </div>
         <div class="actions">
-          <button type="submit">Save Changes</button>
+          <button type="submit" id="submitButton">Add Pokemon</button>
           <button type="button" id="clearButton">Clear</button>
         </div>
       </form>
