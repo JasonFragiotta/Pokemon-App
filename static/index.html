@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokemon Editor</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Pokemon Database Studio</h1>
+        <p>Add and edit Pokemon entries in the database.</p>
+      </div>
+      <div>
+        <strong style="font-size: 0.95rem; color: #d7d4ff;">Tip:</strong>
+        <p style="margin: 10px 0 0; color: #c5b8ff; line-height: 1.6; max-width: 320px;">Click “Edit” to load a record, update values, and save changes back to the database.</p>
+      </div>
+    </header>
+
+    <div class="content-grid">
+      <section class="pokemon-list">
+      <h2>Pokemon List</h2>
+      <div class="controls">
+        <label>
+          Search by name
+          <input id="searchInput" type="text" placeholder="e.g. Charizard" />
+        </label>
+      </div>
+      <div id="tableWrapper"></div>
+    </section>
+
+      <section class="edit-panel">
+      <h2>Edit Selected Pokemon</h2>
+      <form id="pokemonForm">
+        <input type="hidden" id="pokemonId" />
+        <div class="form-grid">
+          <label>Name<input id="name" type="text" required /></label>
+          <label>Type 1<input id="type1" type="text" /></label>
+          <label>Type 2<input id="type2" type="text" /></label>
+          <label>HP<input id="hp" type="number" min="1" required /></label>
+          <label>Attack<input id="attack" type="number" min="1" required /></label>
+          <label>Defense<input id="defense" type="number" min="1" required /></label>
+          <label>Sp. Atk<input id="sp_atk" type="number" min="1" required /></label>
+          <label>Sp. Def<input id="sp_def" type="number" min="1" required /></label>
+          <label>Speed<input id="speed" type="number" min="1" required /></label>
+          <label>Generation<input id="generation" type="number" min="1" required /></label>
+          <label>Legendary<select id="legendary">
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select></label>
+        </div>
+        <div class="actions">
+          <button type="submit">Save Changes</button>
+          <button type="button" id="clearButton">Clear</button>
+        </div>
+      </form>
+    </section>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
